@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/demo/demo.css">
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="resources/js/index.js"></script>
+</head>
+<body>
+<table id="dg" title="用户管理" class="easyui-datagrid"
+		data-options="url:'index.do?stuList',
+		loadMsg: '正在努力加载数据，请稍后...',
+		loading:true,
+		striped:true,
+		toolbar:'#toolbar',
+		pagination:true,
+		rownumbers:true,
+		fitColumns:true,
+		singleSelect:true,
+		fit:true,
+		sortName:'id',
+		sortOrder:'desc'">
+	<thead>
+    	<tr>
+			<th data-options="field:'id'" width="50" hidden="true">编号</th>
+			<th data-options="field:'name',sortable: true" width="50">姓名</th>
+			<th data-options="field:'sex',sortable: true" width="50">性别</th>
+			<th data-options="field:'age',sortable: true" width="50">年龄</th>
+   		</tr>
+	</thead>
+</table>
+<div id="toolbar">
+	<a href="javascript:void(0)" id="newstu" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加学员</a>
+	<a href="javascript:void(0)" id="editstu" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑学员</a>
+	<a href="javascript:void(0)" id="delstu" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除学员</a>
+	<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding:10px 20px"
+     	data-options="closed:true,buttons:'#dlg-buttons'">
+		<form id="fm" method="post">
+			<table cellspacing="10px;">
+				<tr>
+					<td>姓名：</td>
+				    <td><input name="name" class="easyui-validatebox" data-options="required:true,missingMessage:'请填写姓名'" style="width: 200px;"></td>
+				</tr>
+				<tr>
+					<td>性别</td>
+					<td>男<input name="sex" id="sexnan" type="radio" value="男">女<input name="sex" id="sexnv" type="radio" value="女"></td>
+				</tr>
+				<tr>
+					<td>年龄</td>
+					<td><input name="age" class="easyui-numberbox" data-options="min:18,max:80,required:true,missingMessage:'请填写年龄(18~80)'" style="width: 200px;"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" id="addstu" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
+	</div>	
+</div>
+</body>
+</html>

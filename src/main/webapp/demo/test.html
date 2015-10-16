@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+ <script type="text/javascript">  
+ function myReload(obj){  
+	 obj.src="my.do?hello&id="+Math.random();
+ }  
+    </script>  
+<body>
+<div align="center">
+	<form action="test.do?code" method="post">
+			<input name="codeString" style=""><br>
+			<input name="codeString" style="width:50px;">
+			<a href="#"><img id="createCheckCode" alt="" src="my.do?hello" style="height:17px" title="换一张" onClick="myReload(this)"></a>
+ 			<input type="submit" value="提交"><input type="reset" value="重置">
+	</form>	
+</div>
+</body>
+</html>

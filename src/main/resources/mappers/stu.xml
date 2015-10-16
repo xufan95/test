@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.examw.demo.dao.IStuDAO">
+	 <select id="findStus" parameterType="Stu" resultType="Stu">
+         select * from stu
+         <trim prefix="WHERE" suffixOverrides="AND">
+             <if test="id != 0">
+                 `id` = #{id} AND
+             </if>
+             <if test="age != 0">
+                 `age` = #{age} AND
+             </if>
+             <if test="name != null and name != '' " >
+                 (`name` like concat('%',#{name},'%')) AND
+             </if>
+             <if test="sex != null and sex != '' ">
+                 (`sex` like concat('%',#{sex},'%')) AND
+             </if>
+         </trim>
+    </select>
+	<select id="selectCount" resultType="int">
+		select count(*) as num1 from stu 
+	</select>
+	<select id="selectstus" parameterType="com.examw.demo.domain.PageBean" resultType="Stu">
+		select * from stu 
+			<if test="sort != null and sort != ''">
+				order by ${sort} ${order}
+			</if>
+		limit #{start},#{rows}
+	</select>
+	<insert id="addstu" parameterType="Stu">
+		insert into stu values(null,#{name},#{sex},#{age})
+	</insert>
+	<update id="upstu" parameterType="Stu">
+		update stu
+		<trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="sex != null and sex != '' ">
+                `sex` = #{sex},
+            </if>
+            <if test="age != 0">
+                `age` = #{age}
+            </if>
+        </trim>
+         where `id` = #{id}
+	</update>
+	<delete id="delstu" parameterType="long">
+		delete from stu where id=#{id}
+	</delete>
+</mapper>

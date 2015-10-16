@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="resources/jquery-easyui-1.3.3/demo/demo.css">
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="resources/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="resources/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="resources/css/index.css">
+	<style type="text/css" >
+/* 	#cc{  background-image:url('resources/images/ice.bmp');
+          filter:alpha(opacity=50);  
+          -moz-opacity:0.5;  
+          -khtml-opacity: 0.5;  
+          opacity: 0.5;
+    }  */  
+	</style>
+	<script type="text/javascript">
+	$(window).bind('beforeunload',function(){ 
+		alert("~~~~~~~~~~~~~~~");
+		window.location='verification.do?logout'
+		});  
+	function addTab(tabTitle,url,icon){
+		if(!$('#tabs').tabs('exists',tabTitle)){
+			$('#tabs').tabs('add',{
+				title:tabTitle,
+				icon:icon,
+				content:createFrame(url),
+				closable:true,
+				width:$('#mainPanle').width()-10,
+				height:$('#mainPanle').height()-26
+			});
+		}else{
+			$('#tabs').tabs('select',tabTitle);
+		}
+		tabClose();
+	}
+	function createFrame(url)
+	{
+		var s = '<iframe name="mainFrame" scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+		return s;
+	}
+
+	function tabClose()
+	{
+		/*双击关闭TAB选项卡*/
+		$(".tabs-inner").dblclick(function(){
+			var subtitle = $(this).children("span").text();
+			$('#tabs').tabs('close',subtitle);
+		})
+
+		$(".tabs-inner").bind('contextmenu',function(e){
+			$('#mm').menu('show', {
+				left: e.pageX,
+				top: e.pageY,
+			});
+			
+			var subtitle =$(this).children("span").text();
+			$('#mm').data("currtab",subtitle);
+			
+			return false;
+		});
+	}
+	</script>
+</head>
+<body class="easyui-layout" id="cc">  
+	<!--上北 -->
+    <div data-options="region:'north',title:'xufan----------平台'" style="height:100px;background:#eee;">
+	<div style="float:right;margin:10px 30px 0 0;">
+	<label style="margin:0 10px;">当前用户：${username}</label><span>|</span>
+	<label style="margin:0 10px;"><a style="" href="javascript:void(0);" onclick="window.location='verification.do?logout'">安全退出</a> </label>
+</div>
+    </div>  
+    <!-- 下南 -->
+    <div data-options="region:'south',title:'',border:false,collapsible:false," style="height:25px;">
+    	<div align="center" style="color: #CC99FF; padding-top: 2px">
+    &copy; 版权所有
+     <span class="tip"><a href="http://www.examw.com" title="畅亨信息技术有限责任公司">畅亨信息</a> (推荐谷歌浏览器，获得更快响应速度)  技术支持:<a href="#" title="畅亨信息技术有限责任公司">畅亨信息</a></span>
+    	</div>
+    </div>  
+    <!-- 右东 -->
+    <div data-options="region:'east',iconCls:'icon-reload',title:'辅助工具'" id="east" style="width:184px;">
+	<div id="cc" class="easyui-calendar" data-options="border:false" style="width:180px;height:180px;"></div>  
+</div>  
+    <!-- 左西 -->
+    <div data-options="region:'west',title:'导航菜单'," style="width:150px;">
+    	<div id="aa" class="easyui-accordion" data-options="fit:true,border:false">  
+		    
+		</div>  
+    	
+    </div>  
+    <!-- 中间 -->
+    <div data-options="region:'center',title:'内容',split:true,noheader:true" id="mainPanle">
+    	<div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+    		<div title="首页" style="padding:20px;overflow:hidden;" id="home">
+				
+			<h1>Welcome to jQuery UI!</h1>
+
+			</div>
+   		</div>
+    </div>  
+    <div id="mm" class="easyui-menu" style="width:150px;">
+		<div id="mm-tabclose">关闭</div>
+		<div id="mm-tabcloseall">全部关闭</div>
+		<div id="mm-tabcloseother">除此之外全部关闭</div>
+		<div class="menu-sep"></div>
+		<div id="mm-tabcloseright">当前页右侧全部关闭</div>
+		<div id="mm-tabcloseleft">当前页左侧全部关闭</div>
+		<div class="menu-sep"></div>
+		<div id="mm-exit">退出</div>
+	</div>
+</body> 
+</html>

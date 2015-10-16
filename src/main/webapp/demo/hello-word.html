@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div align="center">
+<br/><br/><br/>
+<a href="index.do?adds">添加学员</a>
+<br/><br/><br/>
+<table border="1" style="width: 500px">
+	<tr>
+		<th>姓名</th>
+		<th>性别</th>
+		<th>年龄</th>
+		<th>操作</th>
+	</tr>
+	<#list stus as stu>
+		<tr align="center">
+			<td>${stu.name}</td>
+			<td>${stu.sex}</td>
+			<td>${stu.age}</td>
+			<td><a href="index.do?delstu&id=${stu.id}">删除</a>--<a href="index.do?updatestu&id=${stu.id}">修改</a></td>
+		</tr>
+	</#list>
+</table>
+</div>
+</body>
+</html>
